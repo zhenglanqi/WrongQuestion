@@ -1,41 +1,44 @@
-﻿#include <stdio.h>
+/* Print Hourglass */
+#include <stdio.h>
 
 int main(int argc, char* argv[])
 {
-	int n;
+	int N;
 	char c;
-	int sum = 1; /* 当前的和   */
-	int t;       /* 合理的和   */
-	int col = 1; /* 当前的星数 */
-	scanf_s("%d %c", &n, &c, 2);
-	while (sum <= n) {
+	scanf_s("%d %c", &N, &c, 2);
+	/* Find numbers of character in first line. */
+	int col = 1;
+	int sum = 1;
+	int t;
+	while (sum <= N) {
 		t = sum;
 		col += 2;
 		sum += col * 2;
 	}
-	col -= 2;    /* 合理的星数 */
-
-	int b = 0;
-	int row = col;   /* 待打印的行数 */
+	col -= 2;
+	/* Print characters by lines */
+	int row = col;
+	int space = 0;
 	int flag = 1;
 	for (int i = 0; i < row; ++i) {
-		for (int z = 0; z < b; ++z) {
+		for (int j = 0; j < space; ++j) {
 			printf(" ");
 		}
-		for (int j = 0; j < col; ++j) {
+		for (int k = 0; k < col; ++k) {
 			printf("%c", c);
 		}
+		printf("\n");
 		if (col != 1 && flag) {
 			col -= 2;
-			++b;
+			++space;
 		}
 		else if (col == 1 || !flag) {
 			col += 2;
-			--b;
+			--space;
 			flag = 0;
 		}
-		printf("\n");
 	}
-	printf("%d\n", n - t);
+	/* Print remaining numbers of characters */
+	printf("%d\n", N - t);
 	return 0;
 }

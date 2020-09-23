@@ -1,0 +1,44 @@
+/* Print Hourglass */
+#include <stdio.h>
+
+int main(int argc, char* argv[])
+{
+	int N;
+	char c;
+	scanf_s("%d %c", &N, &c, 2);
+	/* Find numbers of character in first line. */
+	int col = 1;
+	int sum = 1;
+	int t;
+	while (sum <= N) {
+		t = sum;
+		col += 2;
+		sum += col * 2;
+	}
+	col -= 2;
+	/* Print characters by lines */
+	int row = col;
+	int space = 0;
+	int flag = 1;
+	for (int i = 0; i < row; ++i) {
+		for (int j = 0; j < space; ++j) {
+			printf(" ");
+		}
+		for (int k = 0; k < col; ++k) {
+			printf("%c", c);
+		}
+		printf("\n");
+		if (col != 1 && flag) {
+			col -= 2;
+			++space;
+		}
+		else if (col == 1 || !flag) {
+			col += 2;
+			--space;
+			flag = 0;
+		}
+	}
+	/* Print remaining numbers of characters */
+	printf("%d\n", N - t);
+	return 0;
+}

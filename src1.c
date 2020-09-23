@@ -1,44 +1,31 @@
-/* Print Hourglass */
+/* Prime Pair Conjecture */
 #include <stdio.h>
+#include <math.h>
+
+int isprime(int number)
+{
+	int ret = 1;
+	if (number == 0 || number == 1) {
+		ret = 0;
+	}
+	for (int i = 2; i <= sqrt(number); ++i) {
+		if (number % i == 0) {
+			ret = 0;
+			break;
+		}
+	}
+	return ret;
+}
 
 int main(int argc, char* argv[])
 {
 	int N;
-	char c;
-	scanf_s("%d %c", &N, &c, 2);
-	/* Find numbers of character in first line. */
-	int col = 1;
-	int sum = 1;
-	int t;
-	while (sum <= N) {
-		t = sum;
-		col += 2;
-		sum += col * 2;
-	}
-	col -= 2;
-	/* Print characters by lines */
-	int row = col;
-	int space = 0;
-	int flag = 1;
-	for (int i = 0; i < row; ++i) {
-		for (int j = 0; j < space; ++j) {
-			printf(" ");
-		}
-		for (int k = 0; k < col; ++k) {
-			printf("%c", c);
-		}
-		printf("\n");
-		if (col != 1 && flag) {
-			col -= 2;
-			++space;
-		}
-		else if (col == 1 || !flag) {
-			col += 2;
-			--space;
-			flag = 0;
+	int count = 0;
+	scanf_s("%d", &N, 1);
+	for (int i = 3; i <= N - 2; ++i) {
+		if (isprime(i) && isprime(i + 2)) {
+			++count;
 		}
 	}
-	/* Print remaining numbers of characters */
-	printf("%d\n", N - t);
-	return 0;
+	printf("%d\n", count);
 }

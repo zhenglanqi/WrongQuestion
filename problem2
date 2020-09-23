@@ -1,0 +1,31 @@
+/* Prime Pair Conjecture */
+#include <stdio.h>
+#include <math.h>
+
+int isprime(int number)
+{
+	int ret = 1;
+	if (number == 0 || number == 1) {
+		ret = 0;
+	}
+	for (int i = 2; i <= sqrt(number); ++i) {
+		if (number % i == 0) {
+			ret = 0;
+			break;
+		}
+	}
+	return ret;
+}
+
+int main(int argc, char* argv[])
+{
+	int N;
+	int count = 0;
+	scanf_s("%d", &N, 1);
+	for (int i = 3; i <= N - 2; ++i) {
+		if (isprime(i) && isprime(i + 2)) {
+			++count;
+		}
+	}
+	printf("%d\n", count);
+}

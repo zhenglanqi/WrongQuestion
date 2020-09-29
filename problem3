@@ -1,0 +1,22 @@
+/* Array Element Rotate Right Problem */
+#include <stdio.h>
+
+int main(int argc, char* argv[])
+{
+	int N, M, arr[100];
+	scanf_s("%d %d", &N, &M);
+	/* Input N elements to shifted position */
+	for (int i = 0; i < N; ++i) {
+		scanf_s("%d", &arr[(M + i) % N]);
+	}
+	/* Output N elements according to required format */
+	for (int j = 0; j < N; ++j) {
+		if (j == N - 1) {
+			printf("%d", arr[j]);
+		}
+		else {
+			printf("%d ", arr[j]);
+		}
+	}
+	return 0;
+}

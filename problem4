@@ -1,0 +1,46 @@
+/* Have Fun with Numbers */
+#include <stdio.h>
+// The head file include strlen()
+#include <string.h>
+
+int main(int argc, char* argv[])
+{
+	char num[20];
+	int flag_carry = 0, flag_match = 0;
+	int book[20] = { 0 };
+	// Report the buffer size as (unsigned)(sizeof(num) / sizeof(*num)) to scanf_s()
+	scanf_s("%s", num, (unsigned)(sizeof(num) / sizeof(*num)));
+	// Length of numbers
+	int len = strlen(num);
+	for (int i = len - 1; i >= 0; --i) {
+		// Convert an ASCII value of a digit into an integer
+		int temp = num[i] - '0';
+		// Add 1 each time read a digit
+		book[temp] += 1;
+		temp = temp * 2 + flag_carry;
+		flag_carry = 0;
+		if (temp > 9) {
+			temp -= 10;
+			flag_carry = 1;
+		}
+		// Subtract 1 each time generate a digit
+		book[temp] -= 1;
+		// Convert an integer into an ASCII value of a digit
+		temp = temp + '0';
+		num[i] = temp;
+	}
+
+	for (int j = 0; j < len; ++j) {
+		if (book[j] != 0) {
+			flag_match = 1;
+			break;
+		}
+	}
+
+	printf("%s\n", (flag_carry || flag_match) ? "No" : "Yes");
+	if (flag_carry == 1) {
+		printf("1");
+	}
+	printf("%s", num);
+	return 0;
+}
